@@ -1,10 +1,11 @@
 import datetime
 import logging
+from typing import List, Dict, Any
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-def validate_data(data):
+def validate_data(data: Dict[str, Any]) -> None:
     """Validate required fields in PRICAT data."""
     required_fields = ["message_ref", "doc_code", "doc_number", "parties", "items"]
     
@@ -17,7 +18,7 @@ def validate_data(data):
 
     logging.info("Data validation passed.")
 
-def generate_pricat(data, filename="pricat.edi"):
+def generate_pricat(data: Dict[str, Any], filename: str = "pricat.edi") -> str:
     """Generate an EDIFACT PRICAT message and save to a file."""
     
     try:
@@ -93,4 +94,3 @@ pricat_message = generate_pricat(pricat_data)
 if pricat_message:
     print("\nGenerated PRICAT Message:\n")
     print(pricat_message)
-
